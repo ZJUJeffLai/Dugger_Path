@@ -1,5 +1,8 @@
-FROM nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04
+# FROM nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04
+FROM nvidia/cuda:11.5.1-cudnn8-devel-ubuntu20.04
+ENV DEBIAN_FRONTEND noninteractive
 
+RUN apt update && apt install -y tcl
 #########################################
 # SECTION 1: Essentials                 #
 #########################################
@@ -42,11 +45,14 @@ RUN apt-get -y upgrade
 RUN pip3 install pip --upgrade
 RUN pip3 install -U numpy cython ipython \
     jupyter matplotlib pandas scikit-learn \
-    scikit-image scipy tqdm pyvips
+    scikit-image scipy tqdm pyvips 
+    
 
 RUN pip3 install torch==1.4.0 torchvision==0.5.0
 
-RUN pip3 install -U opencv-python==3.4.5.20
+RUN pip3 install -U opencv-python
+
+
 
 # Install jupyter notebook extensions (code folding)
 RUN pip3 install jupyter_contrib_nbextensions \
