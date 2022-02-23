@@ -123,6 +123,7 @@ def show_vips(vips_image, ax=plt, show=True, verbose=False):
         return -1
     
     im_np = array_vips(vips_image)
+    ax.axis('off')
     if verbose:
         print(im_np.shape)
     if vips_image.bands == 1:
